@@ -1,6 +1,8 @@
 pandas
 mlflow
 numpy
+flask
+boto3
 notebook
 scikit-learn
 matplotlib
