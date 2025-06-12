@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Lint code
         run: echo "Linting repository"
@@ -32,6 +34,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install Utilities
         run: |
@@ -61,7 +65,7 @@ jobs:
           cat Dockerfile || echo "Dockerfile not found!"
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
           
           
   Continuous-Deployment:
